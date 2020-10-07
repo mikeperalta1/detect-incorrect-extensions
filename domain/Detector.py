@@ -54,6 +54,10 @@ class Detector:
 		
 		report_items = {}
 		
+		# Start dicts
+		for file_type in self.__file_types.get_types():
+			report_items[file_type.get_key()] = []
+		
 		# Load each file only once, to save disk reads
 		for scanned_file in self.__scanned_files:
 			
@@ -68,9 +72,6 @@ class Detector:
 				report_items_temp = self._check_file(
 					file_type=file_type, scanned_file=scanned_file, file_header=file_header
 				)
-				
-				if file_type.get_key() not in report_items:
-					report_items[type_key] = []
 				
 				for report_item in report_items_temp:
 					report_items[type_key].append(report_item)

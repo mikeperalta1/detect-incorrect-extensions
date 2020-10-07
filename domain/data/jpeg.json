@@ -1,0 +1,18 @@
+{
+  "key": "jpeg",
+  "label": "Jpeg Image",
+  "mime_types": [
+    "image/jpeg"
+  ],
+  "extensions": [
+    "jpeg", "jpg"
+  ],
+  "header": {
+    "markers": [
+      {
+        "offset": 0,
+        "bytes": "\\0xFF\\0xD8"
+      }
+    ]
+  }
+}

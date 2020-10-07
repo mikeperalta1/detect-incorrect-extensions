@@ -6,10 +6,16 @@ from domain.ScannedFile import ScannedFile
 
 class ReportItem:
 	
-	def __init__(self, scanned_file: ScannedFile, file_type_info: FileTypeInfo):
+	def __init__(
+		self,
+		scanned_file: ScannedFile,
+		file_type_info: FileTypeInfo,
+		belongs_to_type: bool
+	):
 		
 		self.__scanned_file = scanned_file
 		self.__file_type_info = file_type_info
+		self.__belongs = belongs_to_type
 	
 	def __str__(self):
 		
@@ -22,3 +28,7 @@ class ReportItem:
 	def get_path(self):
 		
 		return self.__scanned_file.get_path()
+	
+	def belongs(self):
+		
+		return self.__belongs

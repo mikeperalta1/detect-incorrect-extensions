@@ -43,7 +43,10 @@ class Detector:
 			if len(report_items) > 0:
 				for report_item in report_items:
 					report_item: ReportItem
-					print("Found a file:", report_item.get_path())
+					print(
+						"%s: %s" %
+						(("Belongs" if report_item.belongs() else "Doesn't belong"), report_item.get_path())
+					)
 			else:
 				print("No files found for this file type")
 	
@@ -81,24 +84,54 @@ class Detector:
 		
 		return header_bytes
 	
-	@staticmethod
-	def _check_file(file_type: FileTypeInfo, scanned_file: ScannedFile, file_header: bytes):
+	def _check_file(self, file_type: FileTypeInfo, scanned_file: ScannedFile, file_header: bytes):
 		
 		file_extension = scanned_file.get_extension()
 		
 		items = []
 		
-		if file_extension not in file_type.get_extensions():
+		is_file_of_this_type = self._is_file_of_type(file_type=file_type, file_header=file_header)
+		
+		# If this file matches the selected type
+		if is_file_of_this_type:
 			
-			# Look for each marker
-			for marker in file_type.get_header_markers():
-				
-				pos = file_header.find(marker["bytes"])
-				if marker["offset"] is None or pos == marker["offset"]:
-					item = ReportItem(
-						scanned_file=scanned_file,
-						file_type_info=file_type
-					)
-					items.append(item)
+			# File has an appropriate extension; Nothing to see here
+			if file_extension in file_type.get_extensions():
+				pass
+			
+			# File is of this type, but doesn't have an appropriate extension; Add it to the list!
+			else:
+				item = ReportItem(
+					scanned_file=scanned_file,
+					file_type_info=file_type,
+					belongs_to_type=True
+				)
+				items.append(item)
+		
+		else:
+			
+			# File has this extension, but doesn't appear to be this type
+			if file_extension in file_type.get_extensions():
+				item = ReportItem(
+					scanned_file=scanned_file,
+					file_type_info=file_type,
+					belongs_to_type=False
+				)
+				items.append(item)
 		
 		return items
+	
+	@staticmethod
+	def _is_file_of_type(file_type: FileTypeInfo, file_header: bytes):
+		
+		is_of_type = False
+		
+		# Look for each marker
+		for marker in file_type.get_header_markers():
+			
+			pos = file_header.find(marker["bytes"])
+			if marker["offset"] is None or pos == marker["offset"]:
+				is_of_type = True
+				break
+		
+		return is_of_type

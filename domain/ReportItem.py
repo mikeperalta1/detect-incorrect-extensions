@@ -18,3 +18,7 @@ class ReportItem:
 		s += "Extension = %s; Path = %s" % (self.__scanned_file.get_extension(), self.__scanned_file.get_path())
 		
 		return s
+	
+	def get_path(self):
+		
+		return self.__scanned_file.get_path()

@@ -2,8 +2,14 @@
 
 class FileTypeInfo:
 
-	def __init__(self, label, key, mime_types, extensions, header_markers):
-		
+	def __init__(
+		self,
+		label,
+		key,
+		mime_types,
+		extensions,
+		header_markers
+	):
 		self.__label = label
 		
 		self.__key = key
@@ -16,8 +22,6 @@ class FileTypeInfo:
 			extensions = [extensions]
 		self.__extensions = extensions
 		
-		if isinstance(header_markers, str):
-			header_markers = [header_markers]
 		self.__header_markers = header_markers
 		self.__header_markers_max_length = None
 		
@@ -47,6 +51,10 @@ class FileTypeInfo:
 	def get_key(self):
 		
 		return self.__key
+	
+	def get_label(self):
+		
+		return self.__label
 	
 	def get_extensions(self):
 	

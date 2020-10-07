@@ -1,0 +1,39 @@
+{
+  "key": "bitmap",
+  "label": "Bitmap Image",
+  "mime_types": [
+    "image/bmp"
+  ],
+  "extensions": [
+    "bmp"
+  ],
+  "header": {
+    "markers": [
+      {
+        "offset": 0,
+        "bytes": "BM"
+      },
+      {
+        "offset": 0,
+        "bytes": "BA"
+      },
+      {
+        "offset": 0,
+        "bytes": "CI"
+      },
+      {
+        "offset": 0,
+        "bytes": "CP"
+      },
+      {
+        "offset": 0,
+        "bytes": "IC"
+      },
+      {
+        "offset": 0,
+        "bytes": "PT"
+      }
+    ]
+  }
+}
+

@@ -4,6 +4,8 @@
 
 A simple program to detect which files have file extensions that probably don't match their contents.
 
+By Mike Peralta
+
 ## Requirements
 
 * Python3
